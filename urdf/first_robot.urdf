@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<robot name="Panzerkampfwagen VI Ausführung E" xmlns:xacro="http://ros.org/wiki/xacro">
+    
+    <xacro:include filename="shape_creator.xacro"/>
+
+    <link name="base_link">
+        <visual>
+            <geometry> <box size="2 1.4 0.8"/> </geometry>
+            <origin xyz="0 0 0.4" rpy="0 0 0"/>
+            <material name="greenish"/>
+        </visual>
+    </link>
+    
+    <link name="first_ear_link">
+        <visual>
+            <origin xyz="0 0.007 0" rpy="${-pi/2} ${-pi/2} 0"/>
+            <geometry>
+                <mesh filename="package://tank_robot_desc/meshes/ear-flat-bottom.stl" scale="0.005 0.005 0.005"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="second_ear_link">
+        <visual>
+            <origin xyz="0 -0.02 0" rpy="0 ${-pi/2} ${pi/2}"/>
+            <geometry>
+                <mesh filename="package://tank_robot_desc/meshes/ear-flat-bottom.stl" scale="0.005 -0.005 0.005"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <xacro:cylinder_preset prefix="turret_rotor" radius="0.55" length="0.4" xyz="0 0 0.2" rpy="0 0 0" material="bloo"/>
+
+    <xacro:cylinder_rgba prefix="kampfwagenkanone42L" radius="0.07" length="2" xyz="-0.8 0 0" rpy="0 ${pi/2} 0" rgba="0.2 0.6 0.5 1"/>
+
+    <xacro:cylinder_preset prefix="front_right_wheel" radius="0.25" length="0.09" xyz="0 0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+
+    <xacro:cylinder_preset prefix="front_left_wheel" radius="0.25" length="0.09" xyz="0 -0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+
+    <xacro:cylinder_preset prefix="rear_right_wheel" radius="0.25" length="0.09" xyz="0 0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+
+    <xacro:cylinder_preset prefix="rear_left_wheel" radius="0.25" length="0.09" xyz="0 -0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+
+    <joint name="rotor_turret_joint" type="fixed">
+        <parent link="turret_rotor_link"/>
+        <child link="kampfwagenkanone42L_link"/>
+        <origin xyz="-0.55 0 0.2" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="base_rotor_joint" type="revolute">
+        <parent link="base_link"/>
+        <child link="turret_rotor_link"/>
+        <origin xyz="0.2 0 0.8" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="30" velocity="12"/>
+    </joint>
+
+    <joint name="rr_base_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="front_right_wheel_link"/>
+        <origin xyz="0.9 0.7 0.2" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="rl_base_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="front_left_wheel_link"/>
+        <origin xyz="0.9 -0.7 0.2" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="fr_base_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="rear_right_wheel_link"/>
+        <origin xyz="-0.9 0.7 0.2" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="fl_base_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="rear_left_wheel_link"/>
+        <origin xyz="-0.9 -0.7 0.2" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="first_ear_joint" type="fixed">
+        <parent link="turret_rotor_link"/>
+        <child link="first_ear_link"/>
+        <origin xyz="0 0.55 0.2" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="second_ear_joint" type="fixed">
+        <parent link="turret_rotor_link"/>
+        <child link="second_ear_link"/>
+        <origin xyz="0 -0.55 0.2" rpy="0 0 0"/>
+    </joint>
+</robot>

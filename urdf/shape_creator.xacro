@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    
+    <xacro:include filename="generic_properties.xacro"/>
+    
+    <xacro:macro name="cylinder_preset" params="prefix radius length xyz rpy material">
+        <link name="${prefix}_link">
+            <visual>
+                <origin xyz="${xyz}" rpy="${rpy}"/>
+                <geometry> <cylinder radius="${radius}" length="${length}"/> </geometry>
+                <material name="${material}"/>
+            </visual>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_rgba" params="prefix radius length xyz rpy rgba">
+        <link name="${prefix}_link">
+            <visual>
+                <origin xyz="${xyz}" rpy="${rpy}"/>
+                <geometry> <cylinder radius="${radius}" length="${length}"/> </geometry>
+                <material name="ARCIBI">
+                    <color rgba="${rgba}"/> 
+                </material>
+            </visual>
+        </link>
+    </xacro:macro>
+
+</robot>

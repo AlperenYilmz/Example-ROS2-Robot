@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    
+    <material name="greenish">
+        <color rgba="0.2 0.8 0.8 1"/>
+    </material>
+
+    <material name="bloo">
+        <color rgba="0.1 0.2 0.9 1"/>
+    </material>
+
+    <material name="goth">
+        <color rgba="0.75 0.6 0.6 0.92"/>
+    </material>
+</robot>
