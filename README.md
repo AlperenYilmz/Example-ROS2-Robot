@@ -8,5 +8,5 @@ apt install ros-humble-desktop
 ## Installation
 - Create a ament_cmake package in your ROS2 workspace and add these files to that package, build with colcon, then launch with:
 ```console
-ros2 launch tank_robot_desc display_launch.launch.xml
+ros2 launch "yourpkgname" display_launch.launch.xml
 ```
