@@ -10,3 +10,6 @@ apt install ros-humble-desktop
 ```console
 ros2 launch "yourpkgname" display_launch.launch.xml
 ```
+
+## Notes
+- Model is not (yet) Gazebo compatible since it lacks the physical information (mass, gravity, etc.)
