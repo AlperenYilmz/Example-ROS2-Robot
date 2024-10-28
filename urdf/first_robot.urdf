@@ -2,14 +2,7 @@
 <robot name="Panzerkampfwagen VI Ausführung E" xmlns:xacro="http://ros.org/wiki/xacro">
     
     <xacro:include filename="shape_creator.xacro"/>
-
-    <link name="base_link">
-        <visual>
-            <geometry> <box size="2 1.4 0.8"/> </geometry>
-            <origin xyz="0 0 0.4" rpy="0 0 0"/>
-            <material name="greenish"/>
-        </visual>
-    </link>
+    <xacro:include filename="inertia_calculator.xacro"/>
     
     <link name="first_ear_link">
         <visual>
@@ -17,6 +10,9 @@
             <geometry>
                 <mesh filename="package://tank_robot_desc/meshes/ear-flat-bottom.stl" scale="0.005 0.005 0.005"/>
             </geometry>
+            <material name="ARCIBI">
+                <color rgba="0.15 0.68 0.4 1"/>
+            </material>
         </visual>
     </link>
 
@@ -26,20 +22,25 @@
             <geometry>
                 <mesh filename="package://tank_robot_desc/meshes/ear-flat-bottom.stl" scale="0.005 -0.005 0.005"/>
             </geometry>
+            <material name="ARCIBI">
+                <color rgba="0.15 0.68 0.4 1"/>
+            </material>
         </visual>
     </link>
 
-    <xacro:cylinder_preset prefix="turret_rotor" radius="0.55" length="0.4" xyz="0 0 0.2" rpy="0 0 0" material="bloo"/>
+    <xacro:boxoid_preset prefix="base" mass="14000" length="2" depth="1.4" height="0.8" xyz="0 0 0.4" rpy="0 0 0" material="greenish"/>
 
-    <xacro:cylinder_rgba prefix="kampfwagenkanone42L" radius="0.07" length="2" xyz="-0.8 0 0" rpy="0 ${pi/2} 0" rgba="0.2 0.6 0.5 1"/>
+    <xacro:cylinder_preset prefix="turret_rotor" mass="2000" radius="0.55" length="0.4" xyz="0 0 0.2" rpy="0 0 0" material="bloo"/>
 
-    <xacro:cylinder_preset prefix="front_right_wheel" radius="0.25" length="0.09" xyz="0 0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+    <xacro:cylinder_rgba prefix="kampfwagenkanone42L" mass="700" radius="0.07" length="2" xyz="-0.8 0 0" rpy="0 ${pi/2} 0" rgba="0.2 0.6 0.5 1"/>
 
-    <xacro:cylinder_preset prefix="front_left_wheel" radius="0.25" length="0.09" xyz="0 -0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+    <xacro:cylinder_preset prefix="front_right_wheel" mass="600" radius="0.25" length="0.09" xyz="0 0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
 
-    <xacro:cylinder_preset prefix="rear_right_wheel" radius="0.25" length="0.09" xyz="0 0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+    <xacro:cylinder_preset prefix="front_left_wheel" mass="600" radius="0.25" length="0.09" xyz="0 -0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
 
-    <xacro:cylinder_preset prefix="rear_left_wheel" radius="0.25" length="0.09" xyz="0 -0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+    <xacro:cylinder_preset prefix="rear_right_wheel" mass="600" radius="0.25" length="0.09" xyz="0 0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
+
+    <xacro:cylinder_preset prefix="rear_left_wheel" mass="600" radius="0.25" length="0.09" xyz="0 -0.045 0" rpy="0 ${pi/2} ${pi/2}" material="goth"/>
 
     <joint name="rotor_turret_joint" type="fixed">
         <parent link="turret_rotor_link"/>
