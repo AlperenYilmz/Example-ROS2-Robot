@@ -1,6 +1,6 @@
 <launch>
-    <let name="urdf_path" value="$(find-pkg-share tank_robot_desc)/urdf/first_robot.urdf"/>
-    <let name="rviz_conf_path" value="$(find-pkg-share tank_robot_desc)/rviz2_conf/asd.rviz"/>
+    <let name="urdf_path" value="$(find-pkg-share tank_robot_desc)/urdf/tank.urdf.xacro"/>
+    <!-- let name="rviz_conf_path" value="$(find-pkg-share tank_robot_desc)/rviz2_conf/asd.rviz"/-->
 
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="robot_description" value="$(command 'xacro $(var urdf_path)')"/>

@@ -16,7 +16,7 @@ def locateSTL():
 def calculate_inertia(file_path):
     mesh = trimesh.load(file_path)
 
-    mass = mesh.mass
+    mass = 0.1*mesh.volume
     inertia = mesh.moment_inertia
 
     return mass, inertia

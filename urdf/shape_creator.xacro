@@ -15,7 +15,7 @@
                 <origin xyz="${xyz}" rpy="${rpy}"/>
                 <geometry> <cylinder radius="${radius}" length="${length}"/> </geometry>
             </collision>
-            <xacro:cylinder_inertia_calculator m="${mass}" r="${radius}" h="${length}" xyz="${xyz}" rpy="${rpy}"/>
+            <xacro:cylinder_inertia m="${mass}" r="${radius}" h="${length}" xyz="${xyz}" rpy="${rpy}"/>
         </link>
     </xacro:macro>
 
@@ -24,7 +24,7 @@
             <visual>
                 <origin xyz="${xyz}" rpy="${rpy}"/>
                 <geometry> <cylinder radius="${radius}" length="${length}"/> </geometry>
-                <material name="ARCIBI">
+                <material name="${prefix}_link_color">
                     <color rgba="${rgba}"/> 
                 </material>
             </visual>
@@ -32,39 +32,56 @@
                 <origin xyz="${xyz}" rpy="${rpy}"/>
                 <geometry> <cylinder radius="${radius}" length="${length}"/> </geometry>
             </collision>
-            <xacro:cylinder_inertia_calculator m="${mass}" r="${radius}" h="${length}" xyz="${xyz}" rpy="${rpy}"/>
+            <xacro:cylinder_inertia m="${mass}" r="${radius}" h="${length}" xyz="${xyz}" rpy="${rpy}"/>
         </link>
     </xacro:macro>
 
-    <xacro:macro name="boxoid_preset" params="prefix mass length depth height xyz rpy material">
+    <xacro:macro name="box_preset" params="prefix mass length width height xyz rpy material">
         <link name="${prefix}_link">
             <visual>
                 <origin xyz="${xyz}" rpy="${rpy}"/>
-                <geometry> <box size="${length} ${depth} ${height}"/> </geometry>
+                <geometry> <box size="${length} ${width} ${height}"/> </geometry>
                 <material name="${material}"/>
             </visual>
             <collision>
                 <origin xyz="${xyz}" rpy="${rpy}"/>
-                <geometry> <box size="${length} ${depth} ${height}"/> </geometry>
+                <geometry> <box size="${length} ${width} ${height}"/> </geometry>
             </collision>
-            <xacro:boxoid_inertia_calculator m="${mass}" l="${length}" w="${depth}" h="${height}" xyz="${xyz}" rpy="${rpy}"/>
+            <xacro:box_inertia m="${mass}" l="${length}" w="${width}" h="${height}" xyz="${xyz}" rpy="${rpy}"/>
         </link>
     </xacro:macro>
 
-    <xacro:macro name="boxoid_rgba" params="prefix mass length depth height xyz rpy rgba">
+    <xacro:macro name="box_rgba" params="prefix mass length width height xyz rpy rgba">
         <link name="${prefix}_link">
             <visual>
                 <origin xyz="${xyz}" rpy="${rpy}"/>
-                <geometry> <box size="${length} ${depth} ${height}"/> </geometry>
-                <material name="ARCIBI">
+                <geometry> <box size="${length} ${width} ${height}"/> </geometry>
+                <material name="${prefix}_link_color">
                     <color rgba="${rgba}"/>
                 </material>
             </visual>
             <collision>
                 <origin xyz="${xyz}" rpy="${rpy}"/>
-                <geometry> <box size="${length} ${depth} ${height}"/> </geometry>
+                <geometry> <box size="${length} ${width} ${height}"/> </geometry>
             </collision>
-            <xacro:boxoid_inertia_calculator m="${mass}" l="${length}" w="${depth}" h="${height}" xyz="${xyz}" rpy="${rpy}"/>
+            <xacro:box_inertia m="${mass}" l="${length}" w="${width}" h="${height}" xyz="${xyz}" rpy="${rpy}"/>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="sphere_rgba" params="prefix mass radius xyz rpy rgba">
+        <link name="${prefix}_link">
+            <visual>
+                <origin xyz="${xyz}" rpy="${rpy}"/>
+                <geometry> <sphere radius="${radius}"/> </geometry>
+                <material name="${prefix}_link_color">
+                    <color rgba="${rgba}"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="${xyz}" rpy="${rpy}"/>
+                <geometry> <sphere radius="${radius}"/> </geometry>
+            </collision>
+            <xacro:sphere_inertia m="${mass}" r="${radius}" xyz="${xyz}" rpy="${rpy}" />
         </link>
     </xacro:macro>
 </robot>
